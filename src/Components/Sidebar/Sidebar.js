@@ -4,16 +4,21 @@ import { Bookmark, Home, MessageRounded, Notifications, Person, Search, } from "
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Users } from "../../dummyData";
 import Friend from "./Friend/Friend";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
                 <ul className="sidebarList">
-                    <li className="sidebarListItem">
-                        <Home className="sidebarIcon" />
-                        <span className="sidebarListItemText">ホーム</span>
-                    </li>
+                    <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                        <li className="sidebarListItem">
+                            <Home className="sidebarIcon" />
+
+                            <span className="sidebarListItemText">ホーム</span>
+
+                        </li>
+                    </Link>
                     <li className="sidebarListItem">
                         <Search className="sidebarIcon" />
                         <span className="sidebarListItemText">検索</span>
@@ -30,10 +35,13 @@ const Sidebar = () => {
                         <Bookmark className="sidebarIcon" />
                         <span className="sidebarListItemText">ブックマーク</span>
                     </li>
-                    <li className="sidebarListItem">
-                        <Person className="sidebarIcon" />
-                        <span className="sidebarListItemText">プロフィール</span>
-                    </li>
+                    <Link to="/profile/yoimiya" style={{ textDecoration: "none", color: "black" }}>
+                        <li className="sidebarListItem">
+                            <Person className="sidebarIcon" />
+                            <span className="sidebarListItemText">プロフィール</span>
+
+                        </li>
+                    </Link>
                     <li className="sidebarListItem">
                         <SettingsIcon className="sidebarIcon" />
                         <span className="sidebarListItemText">設定</span>
