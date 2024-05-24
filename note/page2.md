@@ -24,28 +24,6 @@ const App = () => {
 
 4. サーバーのレスポンス
 
-- サーバーはリクエストを受け取り、指定されたパスにあるファイルをクライアントに返します。存在するファイルであれば、HTTP 200 レスポンスと共に画像データが返されます。
-
-5. 画像の表示
-
-- ブラウザはレスポンスを受け取り、画像データをレンダリングして表示します。
-
-6. エラー処理
-
-- もし画像ファイルが存在しない場合、サーバーは HTTP 404 レスポンスを返します。
-- ブラウザはこのエラーレスポンスを受け取り、alt 属性のテキストや適切なエラーメッセージを表示する場合があります。
-
-## 絶対パスと相対パス
-
-# 絶対パス
-
-絶対パスは、ファイルやリソースの位置をファイルシステムや URL のルートから完全に指定する方法です（**パスは「/api」から始まる**）。
-絶対パスは、システムのルートディレクトリ（またはウェブサーバーのルート）から始まるため、一意にリソースの位置を特定できます。
-
-例:
-
-ファイルシステムの場合: **ルートディレクトリから指定する**
-
 - Unix 系システム（Linux、macOS）: /home/user/documents/file.txt
 - Windows: C:\Users\user\documents\file.txt
 
@@ -65,7 +43,7 @@ URL の場合: **https から指定する**
 
 URL の場合:
 
-- /assets/images/picture.jpg（ドメインに対する相対パス）または ./assets/images/picture.jpg や ../images/picture.jpg（現在のURLに対する相対パス）が相対パスとなります。
+- /assets/images/picture.jpg（ドメインに対する相対パス）または ./assets/images/picture.jpg や ../images/picture.jpg（現在の URL に対する相対パス）が相対パスとなります。
 
 # 相対パスを絶対パスで表すと
 
@@ -98,34 +76,56 @@ URL の場合
 
 - 現在の URL https://example.com/page/user
 
-- 相対パス1で指定 ./images/picture.jpg
+- 相対パス 1 で指定 ./images/picture.jpg
 - **実際の URL https://example.com/page/user/images/picture.jpg**
   （すなわち、「. = https://example.com/page/user」）
 
-- 相対パス2で指定 /images/picture.jpg
-- **実際の URL https://example.com/images/picture.jpg**
-  
+- 相対パス 2 で指定 /images/picture.jpg
+- \*\*実際の URL https://example.com/images/picture.jp
+
+- サーバーはリクエストを受け取り、指定されたパスにあるファイルをクライアントに返します。存在するファイルであれば、HTTP 200 レスポンスと共に画像データが返されます。
+
+5. 画像の表示
+
+- ブラウザはレスポンスを受け取り、画像データをレンダリングして表示します。
+
+6. エラー処理
+
+- もし画像ファイルが存在しない場合、サーバーは HTTP 404 レスポンスを返します。
+- ブラウザはこのエラーレスポンスを受け取り、alt 属性のテキストや適切なエラーメッセージを表示する場合があります。
+
+## 絶対パスと相対パス
+
+# 絶対パス
+
+絶対パスは、ファイルやリソースの位置をファイルシステムや URL のルートから完全に指定する方法です（**パスは「/api」から始まる**）。
+絶対パスは、システムのルートディレクトリ（またはウェブサーバーのルート）から始まるため、一意にリソースの位置を特定できます。
+
+例:
+
+ファイルシステムの場合: **ルートディレクトリから指定する**g\*\*
+
 例 5:
 
 - 現在の URL https://example.com/page/user
 
-- 相対パス1で指定 ../images/picture.jpg
+- 相対パス 1 で指定 ../images/picture.jpg
 - **実際の URL https://example.com/page/images/picture.jpg**
   （すなわち、「.. = https://example.com/page」）
 
-- 相対パス2で指定 /images/picture.jpg
+- 相対パス 2 で指定 /images/picture.jpg
 - **実際の URL https://example.com/images/picture.jpg**
   （http からすべてのパスを記述してもよい。絶対パスで指定 https://example.com/images/picture.jpg）
 
 # プロキシ設定
 
 ```js
-axios.post("/tasks", { name: inputedCreatedTaskNameByClient }); 
+axios.post("/tasks", { name: inputedCreatedTaskNameByClient });
 ```
 
 というリクエストでは、プロキシ設定によって /task より前のパスが決まります。
 
-たとえば、package.jsonに次のようなプロキシ設定がある場合：
+たとえば、package.json に次のようなプロキシ設定がある場合：
 
 ```json
 {
@@ -138,3 +138,19 @@ axios.post("/tasks", { name: inputedCreatedTaskNameByClient });
 POST https://u-chemitter-with-mern-in-backend.onrender.com/tasks
 
 **プロキシ設定がない場合は、デフォルトで同じオリジン（フロントエンドがホストされている場所）にリクエストが送信されます。**
+
+「オリジン」とは、ウェブのコンテキストでは、特定のウェブページやリソースの基本的な URL を指します。具体的には、以下の 3 つの要素で構成されます：
+
+スキーム（プロトコル）: 例 http または https
+ホスト（ドメイン名）: 例 example.com
+ポート番号: 例 80 （デフォルトの場合は省略可）
+例として、https://example.com:8080/path のオリジンは https://example.com:8080 です。
+
+オリジンの例
+URL: https://example.com/path/page.html
+
+オリジン: https://example.com
+URL: http://example.com:3000/api/data
+
+オリジン: http://example.com:3000
+CORS（クロスオリジンリソース共有）は、異なるオリジン間でのリクエストを許可するための仕組みです。
