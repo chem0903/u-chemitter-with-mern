@@ -17,7 +17,7 @@ const Register = () => {
     // パスワードと確認用パスワードが一致しているか
     if (password.current.value === passwordConfirmation.current.value) {
       try {
-        await axios.post("/auth/register", {
+        await axios.post("https://u-chemitter-with-mern-in-backend.onrender.com/api/auth/register", {
           username: username.current.value,
           email: email.current.value,
           password: password.current.value,

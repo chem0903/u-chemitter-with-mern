@@ -14,8 +14,8 @@ const Timeline = ({ username }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = username
-        ? await axios.get(`/posts/profile/${username}`) // * プロフィール画面での投稿（その人のみの投稿）。
-        : await axios.get(`/posts/timeline/${user._id}`); // * ホーム画面での投稿（自分とフォローしている人の投稿）。
+        ? await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/posts/profile/${username}`) // * プロフィール画面での投稿（その人のみの投稿）。
+        : await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/posts/timeline/${user._id}`); // * ホーム画面での投稿（自分とフォローしている人の投稿）。
       // setPosts(res.data);
       // 投稿を時系列で並び替えるための記述。
       setPosts(

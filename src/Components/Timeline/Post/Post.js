@@ -16,7 +16,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?userId=${post.userId}`);
+      const res = await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/users?userId=${post.userId}`);
       setPostUser(res.data);
     };
     fetchUser();
@@ -24,8 +24,8 @@ const Post = ({ post }) => {
 
   const handleLike = async () => {
     try {
-      await axios.put(`/posts/${post._id}/like`, { userId: user._id });
-      const res = await axios.get(`/posts/${post._id}`);
+      await axios.put(`https://u-chemitter-with-mern-in-backend.onrender.com/api/posts/${post._id}/like`, { userId: user._id });
+      const res = await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/posts/${post._id}`);
       setLike(res.data.likes.length);
     } catch (err) {
       console.log(err);

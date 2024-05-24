@@ -39,7 +39,7 @@ const Share = () => {
 
     try {
       // 投稿内容をデータベースに送信するためのリクエスト。
-      await axios.post("/posts", newPost);
+      await axios.post("https://u-chemitter-with-mern-in-backend.onrender.com/api/posts", newPost);
       window.location.reload();
     } catch (err) {
       console.log(err);

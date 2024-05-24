@@ -18,7 +18,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`/users?username=${username}`);
+        const res = await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/users?username=${username}`);
         setUser(res.data);
       } catch (err) {
         console.log(err);
