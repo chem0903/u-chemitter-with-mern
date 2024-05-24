@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/u-chemitter-with-mern/static/css/main.84958fef.css",
-    "main.js": "/u-chemitter-with-mern/static/js/main.667d5dda.js",
+    "main.js": "/u-chemitter-with-mern/static/js/main.c042075e.js",
     "index.html": "/u-chemitter-with-mern/index.html",
     "main.84958fef.css.map": "/u-chemitter-with-mern/static/css/main.84958fef.css.map",
-    "main.667d5dda.js.map": "/u-chemitter-with-mern/static/js/main.667d5dda.js.map"
+    "main.c042075e.js.map": "/u-chemitter-with-mern/static/js/main.c042075e.js.map"
   },
   "entrypoints": [
     "static/css/main.84958fef.css",
-    "static/js/main.667d5dda.js"
+    "static/js/main.c042075e.js"
   ]
 }

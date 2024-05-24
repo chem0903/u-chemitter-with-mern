@@ -49,7 +49,7 @@ const App = () => {
 - Unix 系システム（Linux、macOS）: /home/user/documents/file.txt
 - Windows: C:\Users\user\documents\file.txt
 
-URL の場合: **ドメインの後から指定する**
+URL の場合: **https から指定する**
 
 - https://example.com/assets/images/picture.jpg
 
@@ -65,7 +65,7 @@ URL の場合: **ドメインの後から指定する**
 
 URL の場合:
 
-- 現在の URL がhttps://example.com/pageの場合、./assets/images/picture.jpgや../images/picture.jpgが相対パスとなります。
+- /assets/images/picture.jpg（ドメインに対する相対パス）または ./assets/images/picture.jpg や ../images/picture.jpg（現在のURLに対する相対パス）が相対パスとなります。
 
 # 相対パスを絶対パスで表すと
 
@@ -98,22 +98,43 @@ URL の場合
 
 - 現在の URL https://example.com/page/user
 
-- 相対パスで指定 ./images/picture.jpg
+- 相対パス1で指定 ./images/picture.jpg
 - **実際の URL https://example.com/page/user/images/picture.jpg**
   （すなわち、「. = https://example.com/page/user」）
 
-- 絶対パスで指定 /images/picture.jpg
+- 相対パス2で指定 /images/picture.jpg
 - **実際の URL https://example.com/images/picture.jpg**
-  （http からすべてのパスを記述してもよい。絶対パスで指定 https://example.com/images/picture.jpg）
-
+  
 例 5:
 
 - 現在の URL https://example.com/page/user
 
-- 相対パスで指定 ../images/picture.jpg
+- 相対パス1で指定 ../images/picture.jpg
 - **実際の URL https://example.com/page/images/picture.jpg**
   （すなわち、「.. = https://example.com/page」）
 
-- 絶対パスで指定 /images/picture.jpg
+- 相対パス2で指定 /images/picture.jpg
 - **実際の URL https://example.com/images/picture.jpg**
   （http からすべてのパスを記述してもよい。絶対パスで指定 https://example.com/images/picture.jpg）
+
+# プロキシ設定
+
+```js
+axios.post("/tasks", { name: inputedCreatedTaskNameByClient }); 
+```
+
+というリクエストでは、プロキシ設定によって /task より前のパスが決まります。
+
+たとえば、package.jsonに次のようなプロキシ設定がある場合：
+
+```json
+{
+  "proxy": "https://u-chemitter-with-mern-in-backend.onrender.com"
+}
+```
+
+この場合、リクエストは次のようになります：
+
+POST https://u-chemitter-with-mern-in-backend.onrender.com/tasks
+
+**プロキシ設定がない場合は、デフォルトで同じオリジン（フロントエンドがホストされている場所）にリクエストが送信されます。**
