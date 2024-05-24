@@ -1,57 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
 import axios from "axios";
-
+import { format } from "timeago.js";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../State/AuthContext";
 
 const Post = ({ post }) => {
-    // const postUser = Users.filter(user => user.id === post.id);
-    const [like, setLike] = useState(post.like);
-    const [isLiked, setIsLiked] = useState(false);
-    const [user, setUser] = useState({});
+  const [like, setLike] = useState(post.likes.length);
+  const [postUser, setPostUser] = useState({});
 
-    const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            const res = await axios.get(`/users/${post.userId}`);
-            setUser(res.data);
-        }
-        fetchUser();
-    }, [])
+  const { user } = useContext(AuthContext);
 
-    const handleLike = () => {
-        setLike(isLiked ? like - 1 : like + 1);
-        setIsLiked(!isLiked);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`/users?userId=${post.userId}`);
+      setPostUser(res.data);
+    };
+    fetchUser();
+  }, [post.userId]);
+
+  const handleLike = async () => {
+    try {
+      await axios.put(`/posts/${post._id}/like`, { userId: user._id });
+      const res = await axios.get(`/posts/${post._id}`);
+      setLike(res.data.likes.length);
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    return <div className="post">
-        <div className="postWrapper">
-            <div className="postTop">
-                <div className="postTopLeft">
-                    <img src={user.profilePicture || `${PUBLIC_FOLDER}/noAvatar.png`} alt="" className="postProfileImg" />
-                    <span className="postUsername">{user.username}</span>
-                    <span className="postDate">{post?.date}</span>
-                </div>
-                <div className="postTopRight">
-                    <MoreVert />
-                </div>
-            </div>
-            <div className="postCenter">
-                <span className="postText">{post.description}</span>
-                <img src={post.img} alt="" className="postImg" />
-            </div>
-            <div className="postBottom">
-                <div className="postBottomLeft">
-                    <img src={PUBLIC_FOLDER + "/heart.png"} alt="" className="likeIcon" onClick={handleLike} />
-                    <span className="postLikeCounter">{post.likes.length}人がいいねしました</span>
-                </div>
-                <div className="postBottomRight">
-                    <span className="postCommentText">{post.comment}</span>
-                </div>
-            </div>
+  return (
+    <div className="post">
+      <div className="postWrapper">
+        <div className="postTop">
+          <div className="postTopLeft">
+            <Link to={`/profile/${postUser.username}`} style={{ textDecoration: "none", color: "black" }}>
+              <img src={postUser.profilePicture ? PUBLIC_FOLDER + postUser.profilePicture : `${PUBLIC_FOLDER}/noAvatar.png`} alt="" className="postProfileImg" />
+            </Link>
+            <span className="postUsername">{postUser.username}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
+          </div>
+          <div className="postTopRight">
+            <MoreVert />
+          </div>
         </div>
-    </div>;
+        <div className="postCenter">
+          <span className="postText">{post.description}</span>
+          <img src={PUBLIC_FOLDER + post.img} alt="" className="postImg" />
+        </div>
+        <div className="postBottom">
+          <div className="postBottomLeft">
+            <img src={PUBLIC_FOLDER + "/heart.png"} alt="" className="likeIcon" onClick={handleLike} />
+            <span className="postLikeCounter">{like}人がいいねしました</span>
+          </div>
+          <div className="postBottomRight">
+            <span className="postCommentText">{post.comment}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Post;
