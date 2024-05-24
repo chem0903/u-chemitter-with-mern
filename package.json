@@ -26,6 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://chem0903.github.io/u-chemitter-with-mern",
   "eslintConfig": {
     "extends": [
       "react-app",
