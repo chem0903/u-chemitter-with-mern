@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 
 const Profile = () => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const SEVER_API = process.env.REACT_APP_SEVER_API;
 
   // アドレスバーのパラメータを取得できる
   const username = useParams().username;
@@ -18,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/users?username=${username}`);
+        const res = await axios.get(`${SEVER_API}/users?username=${username}`);
         setUser(res.data);
       } catch (err) {
         console.log(err);

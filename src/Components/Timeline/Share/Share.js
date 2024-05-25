@@ -5,10 +5,12 @@ import { AuthContext } from "../../../State/AuthContext";
 import axios from "axios";
 
 const Share = () => {
-  const { user } = useContext(AuthContext);
-  const [file, setFile] = useState(null);
-
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const SEVER_API = process.env.REACT_APP_SEVER_API;
+
+  const { user } = useContext(AuthContext);
+
+  const [file, setFile] = useState(null);
 
   const inputDOM = useRef(null);
 
@@ -31,7 +33,7 @@ const Share = () => {
 
       try {
         // 画像をbackendのpublic/imgフォルダに保存するためのリクエスト。
-        await axios.post("https://u-chemitter-with-mern-in-backend.onrender.com/api/upload", fileData);
+        await axios.post(`${SEVER_API}/upload`, fileData);
       } catch (err) {
         console.log(err);
       }
@@ -39,7 +41,7 @@ const Share = () => {
 
     try {
       // 投稿内容をデータベースに送信するためのリクエスト。
-      await axios.post("https://u-chemitter-with-mern-in-backend.onrender.com/api/posts", newPost);
+      await axios.post(`${SEVER_API}/posts`, newPost);
       window.location.reload();
     } catch (err) {
       console.log(err);
