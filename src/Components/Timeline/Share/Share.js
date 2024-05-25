@@ -73,19 +73,8 @@ const Share = () => {
                   setFile(e.target.files[0]);
                 }} // ファイルが選択された（onChangeした）ときに発火。選択されたファイルの情報は上記のようにして取り出せる。
               />
+              <p ckass="filename">{file?.name}</p>
             </label>
-            <div className="shareOption">
-              <Gif className="shareIcon" htmlColor="hotpink" />
-              <span className="shareOptionText">GIF</span>
-            </div>
-            <div className="shareOption">
-              <Face className="shareIcon" htmlColor="green" />
-              <span className="shareOptionText">気持ち</span>
-            </div>
-            <div className="shareOption">
-              <Analytics className="shareIcon" htmlColor="red" />
-              <span className="shareOptionText">投票</span>
-            </div>
           </div>
           <button className="shareButton" type="submit">
             投稿

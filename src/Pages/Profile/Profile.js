@@ -27,6 +27,21 @@ const Profile = () => {
     fetchUser();
   }, []);
 
+  const [profileCover, setProfileCover] = useState(null);
+  const [profileUser, setProfileUser] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const reqData = PUBLIC_FOLDER + profileCover;
+      console.log(profileCover);
+      if (profileCover) {
+        await axios.put(`https://u-chemitter-with-mern-in-backend.onrender.com/api/users/${user._id}`, {
+          coverPicture: reqData,
+        });
+      }
+    })();
+  }, [profileCover]);
+
   return (
     <>
       <Topbar />
@@ -34,10 +49,29 @@ const Profile = () => {
         <Sidebar />
         <div className="profileRight">
           <div className="profileRightTop">
-            <div className="profileCover">
+            <label className="profileCover">
               <img src={user.coverPicture ? PUBLIC_FOLDER + user.coverPicture : `${PUBLIC_FOLDER}/grey.jpg`} alt="" className="profileCoverImg" />
+              <input
+                id="profileCoverImg"
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  setProfileCover(e.target.files[0].name);
+                }}
+              />
               <img src={user.profilePicture ? PUBLIC_FOLDER + user.profilePicture : `${PUBLIC_FOLDER}/noAvatar.png`} alt="" className="profileUserImg" />
-            </div>
+              <input
+                id="profileUserImg"
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  // setProfileUser(e.target.files[0]);
+                  // handleNewProfileUser(e);
+                }} // ファイルが選択された（onChangeした）ときに発火。選択されたファイルの情報は上記のようにして取り出せる。
+              />
+            </label>
             <div className="profileInfo">
               <h4 className="profileInfoName">{user.username}</h4>
               <span className="profileInfoDescription">{user.description}</span>
