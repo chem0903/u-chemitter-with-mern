@@ -31,7 +31,7 @@ const Share = () => {
 
       try {
         // 画像をbackendのpublic/imgフォルダに保存するためのリクエスト。
-        await axios.post("/upload", fileData);
+        await axios.post("https://u-chemitter-with-mern-in-backend.onrender.com/api/upload", fileData);
       } catch (err) {
         console.log(err);
       }

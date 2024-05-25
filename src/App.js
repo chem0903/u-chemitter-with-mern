@@ -7,11 +7,11 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { AuthContext } from "./State/AuthContext";
 
 function App() {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
-    <Router>
-      <Routes >
+    <Router basename="/u-chemitter-with-mern">
+      <Routes>
         <Route path="/" element={user ? <Home /> : <Register />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
