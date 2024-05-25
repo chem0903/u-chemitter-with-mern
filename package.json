@@ -26,9 +26,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "rm -rf docs && npm run build && mv build docs && git add . && git commit -m 'Deploy to GitHub Pages' && git push"
+    "deploy": "rm -rf docs && npm run build && mv build docs && git add . && git commit -m 'Deploy to GitHub Pages'"
   },
-  "homepage": "",
+  "homepage": "https://chem0903.github.io/u-chemitter-with-mern/",
   "eslintConfig": {
     "extends": [
       "react-app",
