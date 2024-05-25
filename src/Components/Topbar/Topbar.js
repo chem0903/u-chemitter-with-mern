@@ -10,7 +10,7 @@ const Topbar = () => {
 
   const logout = () => {
     localStorage.clear();
-    window.location.href = "/";
+    window.location.href = "/u-chemitter-with-mern";
   };
 
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
