@@ -3,6 +3,8 @@ import "./Register.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+const SEVER_API = process.env.REACT_APP_SEVER_API;
+
 const Register = () => {
   const username = useRef();
   const email = useRef();
@@ -17,7 +19,7 @@ const Register = () => {
     // パスワードと確認用パスワードが一致しているか
     if (password.current.value === passwordConfirmation.current.value) {
       try {
-        await axios.post("https://u-chemitter-with-mern-in-backend.onrender.com/api/auth/register", {
+        await axios.post(`${SEVER_API}/auth/register`, {
           username: username.current.value,
           email: email.current.value,
           password: password.current.value,

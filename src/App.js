@@ -11,7 +11,7 @@ function App() {
 
   return (
     <Router>
-      <Routes basename="/u-chemitter-with-mern">
+      <Routes basename="">
         <Route path="/" element={user ? <Home /> : <Register />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />

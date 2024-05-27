@@ -5,6 +5,8 @@ import { Chat, Notifications } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../State/AuthContext";
 
+const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
 const Topbar = () => {
   const { user } = useContext(AuthContext);
 
@@ -13,7 +15,6 @@ const Topbar = () => {
     window.location.href = "/";
   };
 
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">

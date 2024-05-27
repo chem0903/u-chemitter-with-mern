@@ -3,10 +3,10 @@ import "./Rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "./Online/Oline";
 
+const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
 const Rightbar = ({ user }) => {
   const HomeRightbar = () => {
-    const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-
     return (
       <>
         <div className="eventContainer">

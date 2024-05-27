@@ -6,17 +6,18 @@ import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../State/AuthContext";
 
+const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+const SEVER_API = process.env.REACT_APP_SEVER_API;
+
 const Post = ({ post }) => {
   const [like, setLike] = useState(post.likes.length);
   const [postUser, setPostUser] = useState({});
-
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/users?userId=${post.userId}`);
+      const res = await axios.get(`${SEVER_API}/users?userId=${post.userId}`);
       setPostUser(res.data);
     };
     fetchUser();
@@ -24,8 +25,8 @@ const Post = ({ post }) => {
 
   const handleLike = async () => {
     try {
-      await axios.put(`https://u-chemitter-with-mern-in-backend.onrender.com/api/posts/${post._id}/like`, { userId: user._id });
-      const res = await axios.get(`https://u-chemitter-with-mern-in-backend.onrender.com/api/posts/${post._id}`);
+      await axios.put(`${SEVER_API}/posts/${post._id}/like`, { userId: user._id });
+      const res = await axios.get(`${SEVER_API}/posts/${post._id}`);
       setLike(res.data.likes.length);
     } catch (err) {
       console.log(err);
