@@ -12,6 +12,7 @@ const Share = () => {
   const [file, setFile] = useState(null);
 
   const inputDOM = useRef(null);
+  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
